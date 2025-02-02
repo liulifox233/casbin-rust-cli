@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/casbin-rs/casbin-rust-cli/compare/v1.0.0...v1.1.0) (2025-02-02)
+
+
+### Features
+
+* add some subcommands like enforce_ex() & disable semantic-release-action at forks ([#6](https://github.com/casbin-rs/casbin-rust-cli/issues/6)) ([c48bd06](https://github.com/casbin-rs/casbin-rust-cli/commit/c48bd06a2f74f7fbbf40f2d948f64cfd6b29528b))
+
 # 1.0.0 (2025-01-27)
 
 
