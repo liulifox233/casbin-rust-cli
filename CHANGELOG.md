@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/casbin-rs/casbin-rust-cli/compare/v1.1.0...v1.2.0) (2025-02-03)
+
+
+### Features
+
+* switch auto release action to casbin-rs/semantic-release-action-rust to release Windows binary ([#7](https://github.com/casbin-rs/casbin-rust-cli/issues/7)) ([c37869a](https://github.com/casbin-rs/casbin-rust-cli/commit/c37869af9b66baf0709918f02a4c374382c6bab7))
+
 # [1.1.0](https://github.com/casbin-rs/casbin-rust-cli/compare/v1.0.0...v1.1.0) (2025-02-02)
 
 
