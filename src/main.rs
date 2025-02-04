@@ -196,7 +196,7 @@ mod test {
         let response = enforce(
             "examples/basic_model.conf",
             "examples/basic_policy.csv",
-            &vec!["alice".to_owned(), "data1".to_owned(), "read".to_owned()],
+            &["alice".to_owned(), "data1".to_owned(), "read".to_owned()],
         )
         .await;
 
@@ -214,13 +214,13 @@ mod test {
         let response = enforce_ex(
             "examples/basic_model.conf",
             "examples/basic_policy.csv",
-            &vec!["alice".to_owned(), "data1".to_owned(), "read".to_owned()],
+            &["alice".to_owned(), "data1".to_owned(), "read".to_owned()],
         )
         .await;
 
         let expected = json!({
             "allow": true,
-            "explain": vec!["alice", "data1" ,"read"].iter().map(|s| s.to_string()).collect::<Vec<_>>(),
+            "explain": &["alice", "data1" ,"read"].iter().map(|s| s.to_string()).collect::<Vec<_>>(),
         })
         .to_string();
 
@@ -232,7 +232,7 @@ mod test {
         let response = enforce_ex(
             "examples/abac_model.conf",
             "examples/abac_policy.csv",
-            &vec!["alice".to_owned(), json!({"Owner": "alice"}).to_string()],
+            &["alice".to_owned(), json!({"Owner": "alice"}).to_string()],
         )
         .await;
 
