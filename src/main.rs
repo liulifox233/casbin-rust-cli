@@ -138,31 +138,40 @@ async fn enforce_ex(model: &str, policy: &str, command_args: &[String]) -> Strin
     .to_string()
 }
 
+fn value_to_dynamic(value: Value) -> Dynamic {
+    match value {
+        Value::Object(map) => {
+            let mut rhai_map = Map::new();
+            for (k, v) in map {
+                let v: Dynamic = value_to_dynamic(v);
+                rhai_map.insert(k.into(), v);
+            }
+            Dynamic::from(rhai_map)
+        }
+        Value::String(s) => Dynamic::from(s),
+        Value::Bool(b) => Dynamic::from(b),
+        Value::Number(n) => {
+            if n.is_i64() {
+                (n.as_i64().unwrap() as i32).into()
+            } else if n.is_u64() {
+                (n.as_u64().unwrap() as i32).into()
+            } else {
+                n.as_f64().map(Dynamic::from).unwrap()
+            }
+        }
+        Value::Array(arr) => {
+            Dynamic::from(arr.into_iter().map(value_to_dynamic).collect::<Vec<_>>())
+        }
+        Value::Null => Dynamic::UNIT,
+    }
+}
+
 #[derive(Clone, Hash, Debug)]
 pub struct CommandArg(Value);
 
 impl From<CommandArg> for Dynamic {
     fn from(arg: CommandArg) -> Self {
-        match arg.0 {
-            Value::Object(map) => {
-                let mut rhai_map = Map::new();
-                for (k, v) in map {
-                    let v = Dynamic::from(match v {
-                        Value::String(s) => s,
-                        _ => v.to_string(),
-                    });
-                    rhai_map.insert(k.into(), v);
-                }
-                Dynamic::from(rhai_map)
-            }
-            Value::String(s) => Dynamic::from(s),
-            Value::Bool(b) => Dynamic::from(b),
-            Value::Number(n) => n.as_f64().map(Dynamic::from).unwrap_or(Dynamic::UNIT),
-            Value::Array(arr) => {
-                Dynamic::from(arr.into_iter().map(Dynamic::from).collect::<Vec<_>>())
-            }
-            Value::Null => Dynamic::UNIT,
-        }
+        value_to_dynamic(arg.0)
     }
 }
 
