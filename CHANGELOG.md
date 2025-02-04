@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/casbin-rs/casbin-rust-cli/compare/v1.2.0...v1.3.0) (2025-02-04)
+
+
+### Features
+
+* add support for json format args and improve version format ([#8](https://github.com/casbin-rs/casbin-rust-cli/issues/8)) ([5a128b8](https://github.com/casbin-rs/casbin-rust-cli/commit/5a128b8bf9826b1fa4504b7f7f7604b69162d77a))
+
 # [1.2.0](https://github.com/casbin-rs/casbin-rust-cli/compare/v1.1.0...v1.2.0) (2025-02-03)
 
 
